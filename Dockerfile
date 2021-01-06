@@ -1,3 +1,4 @@
+#%%
 FROM nvidia/cuda:11.1-devel-ubuntu20.04
 
 ENV user=anaconda
@@ -27,12 +28,15 @@ RUN echo ${user}:P4ssw0rd#1 | chpasswd
 RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh -O ~/anaconda.sh && \
 /bin/bash ~/anaconda.sh -b -p /opt/conda && rm ~/anaconda.sh && \
 ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-echo ". /opt/conda/etc/profile.d/conda.sh" >> /home/${user}/.bashrc && \
-conda install pytorch=1.7.0 torchvision cuda100 keras-gpu -c pytorch
-#pip install torch==1.7.0+cu110 torchvision==0.8.1+cu110 torchaudio===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
+echo ". /opt/conda/etc/profile.d/conda.sh" >> /home/${user}/.bashrc 
+#conda install pytorch=1.7.0 torchvision cuda100 keras-gpu -c pytorch
 
 # Python packages
-RUN pip3 install gym atari-py opencv-python tensorboard pytorch-ignite tensorboardX ptan
+RUN pip3 install torch==1.7.0+cu110 torchvision==0.8.1+cu110 torchaudio===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
+
+RUN pip3 install gym atari-py opencv-python tensorboard pytorch-ignite tensorboardX ptan 
+
+RUN conda install keras-gpu -c pytorch
 
 # Folder to keep jupyter notebooks 
 RUN mkdir -p /home/${user}/notebooks
