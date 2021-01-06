@@ -53,4 +53,4 @@ WORKDIR /home/${user}/notebooks
 EXPOSE ${JUPYTERPORT}
 
 # Run Jupyter
-ENTRYPOINT jupyter-notebook --ip `ip route list scope link | awk '{ print $7 }'` --port=${JUPYTERPORT} --no-browser --NotebookApp.disable_check_xsrf=True --notebook-dir=/home/${user}/notebooks --log-level=INFO -y
+ENTRYPOINT jupyter-notebook --ip `ip route list scope link | awk '{ print $7 }'` --port=${JUPYTERPORT} -y --no-browser --NotebookApp.disable_check_xsrf=True --notebook-dir=/home/${user}/notebooks --log-level=INFO
