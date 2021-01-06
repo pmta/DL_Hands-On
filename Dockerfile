@@ -1,4 +1,3 @@
-#%%
 FROM nvidia/cuda:11.1-devel-ubuntu20.04
 
 ENV user=anaconda
